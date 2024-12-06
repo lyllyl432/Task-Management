@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('title')->max(50);
             $table->string('desc')->max(255);
             $table->boolean('completed')->default(false);

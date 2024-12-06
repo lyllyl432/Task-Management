@@ -15,7 +15,7 @@ class TaskController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $tasks = Task::where('completed', false)->get();
+        $tasks = Task::where('user_id', $user->id)->where('completed', false)->get();
         return Inertia::render('Main/Task', ['tasks' => $tasks, 'name' => $user->name]);
     }
 
@@ -32,11 +32,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::user()->id;
+
         $validated = $request->validate([
             'title' => 'required|string|max:50',
             'desc' => 'required|string|max:255',
         ]);
-        Task::create(['title' => $validated['title'], 'desc' => $validated['desc']]);
+        $validated['user_id'] = $user_id;
+        Task::create($validated);
         return to_route('task.index');
     }
 

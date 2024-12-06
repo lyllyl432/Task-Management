@@ -3,7 +3,7 @@ import Task from "./Task";
 const Dashboard = () => {
     return (
         <>
-            <Task></Task>
+            <h1>hello world</h1>
         </>
     );
 };
