@@ -13,11 +13,15 @@ const TaskList = ({ task }) => {
         }
     };
     return (
-        <div className="border-b border-gray-200 pb-5 mt-2">
-            <div className="flex gap-3">
-                <h3>{task.title}</h3>
-                <p>{task.desc}</p>
-                <div className="flex gap-2">
+        <div className="bg-blue-700 p-4 rounded-md mt-4">
+            <div className="flex gap-3 items-center">
+                <div className="flex-1">
+                    <h3 className="text-lg font-bold">
+                        {task.title.toUpperCase()}
+                    </h3>
+                    <p className="text-sm">{task.desc}</p>
+                </div>
+                <div className="flex gap-4">
                     <div onClick={() => handleMarkAsDone(task)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

@@ -34,7 +34,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return to_route('dashboard');
+            return to_route('task.index');
         }
         // If login fails, return back with error
         return back()->withErrors([
@@ -69,8 +69,12 @@ class LoginController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.index');
     }
 }

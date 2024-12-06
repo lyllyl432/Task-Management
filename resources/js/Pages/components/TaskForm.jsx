@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
+import Input from "./Input";
+import Button from "./Button";
 const TaskForm = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
         title: "",
@@ -23,24 +25,26 @@ const TaskForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <input
+                <Input
                     id="title"
                     value={data.title}
                     onChange={handleChange}
                     placeholder="Title"
                 />
             </div>
-            <div>
-                <input
+            <div className="mt-2">
+                <textarea
                     id="desc"
                     value={data.desc}
                     onChange={handleChange}
                     placeholder="Description"
-                />
+                    className="w-full outline-black border border-gray-300 rounded-md p-4 text-xs md:text-sm"
+                    rows="8"
+                ></textarea>
             </div>
-            <button type="submit" disabled={processing}>
-                Save task
-            </button>
+            <Button classes="w-full mt-2" type="submit" disabled={processing}>
+                Save Task
+            </Button>
         </form>
     );
 };
