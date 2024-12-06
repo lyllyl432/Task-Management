@@ -1,8 +1,13 @@
 import React from "react";
-
+import { useForm } from "@inertiajs/react";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
+import Button from "../components/Button";
 const Task = ({ tasks = [], name }) => {
+    const { post } = useForm();
+    const handleLogout = () => {
+        post(route("logout"));
+    };
     return (
         <>
             <section className="md:grid md:grid-cols-2 md:gap-14 md:w-full">
@@ -23,6 +28,9 @@ const Task = ({ tasks = [], name }) => {
                         <TaskList key={task.id} task={task} />
                     ))}
                 </div>
+                <Button classes="w-full" onClick={handleLogout}>
+                    Logout
+                </Button>
             </section>
         </>
     );
